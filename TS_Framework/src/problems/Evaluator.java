@@ -1,5 +1,7 @@
 package problems;
 
+import java.util.ArrayList;
+
 import solutions.Solution;
 
 /**
@@ -11,7 +13,7 @@ import solutions.Solution;
  * @author ccavellucci, fusberti
  * @param <E>
  */
-public interface Evaluator<E> {
+public abstract class Evaluator<E> {
 
 	/**
 	 * Gives the size of the problem domain. Typically this is the number of
@@ -74,5 +76,7 @@ public interface Evaluator<E> {
 	 * @return the cost variation resulting from the elements exchange.
 	 */
 	public abstract Double evaluateExchangeCost(E elemIn, E elemOut, Solution<E> sol);
+
+	public abstract ArrayList<Integer> GetCL(ArrayList<Integer> incumbentSol);
 
 }

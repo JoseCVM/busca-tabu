@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import problems.Evaluator;
+import problems.qbf.QBF_Inverse;
 import solutions.Solution;
 
 /**
@@ -217,13 +218,14 @@ public abstract class AbstractTS<E> {
 		bestSol = createEmptySol();
 		constructiveHeuristic();
 		TL = makeTL();
-		for (int i = 0; i < iterations; i++) {
+		long startTime = System.currentTimeMillis();
+		while(System.currentTimeMillis() - startTime <= iterations) {
 			neighborhoodMove();
 			if (bestSol.cost > incumbentSol.cost) {
 				bestSol = new Solution<E>(incumbentSol);
 				if (verbose)
-					System.out.println("(Iter. " + i + ") BestSol = " + bestSol);
-			}
+					System.out.println("(Iter. " + ((double)(System.currentTimeMillis() - startTime)/(double)1000)  + ") BestSol = " + bestSol);
+				}
 		}
 
 		return bestSol;

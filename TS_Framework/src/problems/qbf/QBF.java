@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StreamTokenizer;
+import java.util.ArrayList;
 import java.util.Arrays;
 import problems.Evaluator;
 import solutions.Solution;
@@ -23,7 +24,7 @@ import solutions.Solution;
  * @author ccavellucci, fusberti
  *
  */
-public class QBF implements Evaluator<Integer> {
+public class QBF extends Evaluator<Integer> {
 
 	/**
 	 * Dimension of the domain.
@@ -376,6 +377,12 @@ public class QBF implements Evaluator<Integer> {
 		
 		
 
+	}
+
+	@Override
+	public ArrayList<Integer> GetCL(ArrayList<Integer> incumbentSol) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

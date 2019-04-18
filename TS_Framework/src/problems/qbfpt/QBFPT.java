@@ -13,7 +13,7 @@ import java.util.HashSet;
 import problems.Evaluator;
 import solutions.Solution;
 
-public class QBFPT implements Evaluator<Integer> {
+public class QBFPT extends Evaluator<Integer> {
 
     /**
      * Dimension of the domain.
@@ -55,7 +55,7 @@ public class QBFPT implements Evaluator<Integer> {
     public Integer[][] mountProhibitedList() {
         Integer[][] triples = new Integer[size][3];
         for (int i = 0; i < size; i++) {
-            triples[i][0] = i;
+            triples[i][0] = i+1;
 
             if (lFunction(i, 131, 1031) != i) {
                 triples[i][1] = lFunction(i, 131, 1031);
@@ -74,9 +74,9 @@ public class QBFPT implements Evaluator<Integer> {
             Integer maxi = Math.max(triples[i][0], Math.max(triples[i][1], triples[i][2]));
             Integer mini = Math.min(triples[i][0], Math.min(triples[i][1], triples[i][2]));
             Integer middle = triples[i][0] + triples[i][1] + triples[i][2] - maxi - mini;
-            triples[i][0] = mini;
-            triples[i][1] = middle;
-            triples[i][2] = maxi;
+            triples[i][0] = mini-1;
+            triples[i][1] = middle-1;
+            triples[i][2] = maxi-1;
         }
         return triples;
     }
@@ -91,10 +91,15 @@ public class QBFPT implements Evaluator<Integer> {
         return 1 + ((pi_1 * u + pi_2) % size);
     }
 
-    public ArrayList<Integer> GetCL(ArrayList<Integer> incumbentSol, ArrayList<Integer> OldCL) {
+
+    public ArrayList<Integer> GetCL(ArrayList<Integer> incumbentSol) {
         HashSet<Integer> sol = new HashSet<Integer> (incumbentSol);
 
-        HashSet<Integer> CL = new HashSet<Integer>(OldCL);
+
+		HashSet<Integer> CL = new HashSet<Integer>();
+		for (int i = 0; i < this.getDomainSize(); i++)
+			if (!sol.contains(i))
+				CL.add(i);
 
         for (int i = 0; i < this.prohibited_triples.length; i++)
         {
@@ -425,4 +430,6 @@ public class QBFPT implements Evaluator<Integer> {
         System.out.println("f(x) = " + qbf.evaluateQBF());
 
     }
+
+
 }
